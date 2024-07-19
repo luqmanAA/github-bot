@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import 'dotenv/config';
 
 import {addPRComment, verifySignature} from './services/repositoryService.js';
-import {triggerDeployment} from './services/deploymentService.js';
+import {triggerDeployment, removeDeployedContainer} from './services/deploymentService.js';
 
 const app = express();
 const port = process.env.PORT || 3003;
@@ -24,14 +24,33 @@ app.post('/webhook', async (req, res) => {
     if (event === 'pull_request') {
         const action = req.body.action;
         console.log(action)
-        if (action === 'opened' || action === 'reopened') {
-            const prNumber = req.body.number;
-            const branchName = req.body.pull_request.head.ref;
-            const repoName = req.body.repository.full_name;
+        const prNumber = req.body.number;
+        const branchName = req.body.pull_request.head.ref;
+        const repoName = req.body.repository.full_name;
 
+        const repoUrl = `https://github.com/${repoName}.git`;
+        const imageName = `${repoName.replace('/', '_')}_${branchName}`.toLowerCase();
+        const containerName = `${imageName}_pr_${prNumber}`.toLowerCase();
+
+        if (action === 'opened' || action === 'reopened' || action === 'synchronize') {
             try {
-                const deploymentLink = await triggerDeployment(repoName, branchName);
-                await addPRComment(repoName, prNumber, deploymentLink);
+                const preDeployMessage = 'The PR is currently being deployed...'
+                await addPRComment(repoName, prNumber, preDeployMessage);
+
+                const postDeployMessage = await triggerDeployment(repoUrl, branchName, prNumber, imageName, containerName);
+                await addPRComment(repoName, prNumber, postDeployMessage);
+                
+                console.log("Deployment completed and comment added!")
+            } catch (error) {
+                console.error('Error during deployment:', error);
+            }
+        }
+
+        else if (action === 'closed') {
+            try {
+                const message = await removeDeployedContainer(containerName, imageName);
+                await addPRComment(repoName, prNumber, message);
+                console.log('Container removed and comment added')
             } catch (error) {
                 console.error('Error during deployment:', error);
             }

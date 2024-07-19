@@ -6,22 +6,15 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 let encoder = new TextEncoder();
 
-export async function addPRComment(repoName, prNumber, deploymentLink) {
+export async function addPRComment(repoName, prNumber, message) {
     const octokit = new Octokit({ auth: GITHUB_TOKEN });
     const url = `/repos/${repoName}/issues/${prNumber}/comments`;
     const comment = {
-        body: `Deployment complete! View it here: ${deploymentLink}`
+        body: message
     };
 
     await octokit.request('POST ' + url, comment);
 }
-
-// export function verifySignature(payload, signature) {
-//     const hmac = crypto.createHmac('sha1', WEBHOOK_SECRET);
-//     hmac.update(payload, 'utf-8');
-//     const digest = 'sha1=' + hmac.digest('hex');
-//     return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(digest));
-// }
 
 export async function verifySignature(header, payload) {
     let parts = header.split("=");
