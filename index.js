@@ -29,7 +29,8 @@ app.post('/webhook', async (req, res) => {
         const repoName = req.body.repository.full_name;
 
         const repoUrl = `https://github.com/${repoName}.git`;
-        const repoBranchName = `${repoName}_${branchName}`.replace('/', '_');
+        const repoBranchName = `${repoName.replace('/', '_')}_${branchName.replace('/', '_')}`;
+        console.log(repoBranchName)
         const imageName = repoBranchName.toLowerCase();
         const containerName = `${imageName}_pr_${prNumber}`.toLowerCase();
 
