@@ -3,7 +3,7 @@ import { promises as fs } from 'fs';
 import ngrok from 'ngrok';
 
 
-const DEPLOYMENT_BASE_URL = process.env.DEPLOYMENT_BASE_URL
+const NGROK_AUTH_TOKEN = process.env.NGROK_AUTH_TOKEN
 
 function runCommand(command, args, cwd) {
     return new Promise((resolve, reject) => {
@@ -87,7 +87,11 @@ export async function removeDeployedContainer(containerName, folderName) {
 
 async function getNgrokUrl(port){
     try {
-        const url = await ngrok.connect(port);
+        const url = await ngrok.connect({
+            proto: 'http',
+            addr: port,
+            authtoken: NGROK_AUTH_TOKEN
+        });
         console.log(`ngrok tunnel started: ${url}`);
         return url;
 
