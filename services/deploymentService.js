@@ -27,7 +27,7 @@ function runCommand(command, args, cwd) {
 
 export async function triggerDeployment(repoUrl, branchName, prNumber, imageName, containerName) {
     const containerPort = process.env.containerPort || 5000
-    const hostPort = 3000 + (prNumber % 1000);
+    const hostPort = 9000 + (prNumber % 1000);
     const folderName = imageName
 
     try {
