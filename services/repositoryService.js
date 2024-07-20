@@ -1,13 +1,29 @@
 import crypto from 'crypto';
+import { createAppAuth } from "@octokit/auth-app";
 import { Octokit } from "@octokit/core";
+import fs from "fs";
+import path from "path";
 
 const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const APP_ID = process.env.APP_ID;
+const PRIVATE_KEY_PATH = process.env.PRIVATE_KEY_PATH;
+const INSTALLATION_ID = process.env.INSTALLATION_ID;
 
 let encoder = new TextEncoder();
 
 export async function addPRComment(repoName, prNumber, message) {
-    const octokit = new Octokit({ auth: GITHUB_TOKEN });
+
+    const privateKeyPath = path.resolve(PRIVATE_KEY_PATH);
+    const privateKey = fs.readFileSync(privateKeyPath, "utf8");
+
+    const octokit = new Octokit({
+        authStrategy: createAppAuth,
+        auth: {
+          appId: APP_ID,
+          privateKey: privateKey,
+          installationId: INSTALLATION_ID,
+        },
+      });
     const url = `/repos/${repoName}/issues/${prNumber}/comments`;
     const comment = {
         body: message

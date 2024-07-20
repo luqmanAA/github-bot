@@ -1,5 +1,6 @@
 import { spawn } from 'child_process';
 import { promises as fs } from 'fs';
+import ngrok from 'ngrok';
 
 
 const DEPLOYMENT_BASE_URL = process.env.DEPLOYMENT_BASE_URL
@@ -58,7 +59,7 @@ export async function triggerDeployment(repoUrl, branchName, prNumber, imageName
         await runCommand('docker run -d --name', [containerName, `-p ${hostPort}:${containerPort}`, imageName]);
 
         // build the URL of the deployed app and return as part of a message
-        const deploymentLink = `${DEPLOYMENT_BASE_URL}:${hostPort}`;
+        const deploymentLink = await getNgrokUrl(hostPort);
         return `Deployment completed! View it here: ${deploymentLink}`;
 
     } catch (error) {
@@ -80,5 +81,17 @@ export async function removeDeployedContainer(containerName, folderName) {
     } catch (error) {
         console.error(`Error while removing deployment resources: ${error}`);
         throw error;
+    }
+}
+
+
+async function getNgrokUrl(port){
+    try {
+        const url = await ngrok.connect(port);
+        console.log(`ngrok tunnel started: ${url}`);
+        return url;
+
+    } catch (err) {
+        console.error(`Error starting ngrok: ${err}`);
     }
 }
