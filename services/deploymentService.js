@@ -54,7 +54,7 @@ export async function triggerDeployment(repoUrl, branchName, prNumber, imageName
             }
 
             console.log('Pulling the remote branch for updates')
-            await runCommand(`git pull`);
+            await runCommand(`cd ${folderName} && git checkout ${branchName} && git pull origin ${branchName}`);
 
             } else {
 
