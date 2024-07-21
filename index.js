@@ -28,6 +28,7 @@ app.post('/webhook', async (req, res) => {
         const branchName = req.body.pull_request.head.ref;
         const repoName = req.body.repository.full_name;
         const forkName = req.body.pull_request.head.repo.full_name;
+        const installationId = req.body.installation.id
 
         const repoUrl = `https://github.com/${repoName}.git`;
         const repoBranchName = `${repoName.replace('/', '_')}_${branchName.replace('/', '_')}`;
@@ -39,10 +40,10 @@ app.post('/webhook', async (req, res) => {
         if (action === 'opened' || action === 'reopened' || action === 'synchronize') {
             try {
                 const preDeployMessage = 'The PR is currently being deployed...'
-                await addPRComment(repoName, prNumber, preDeployMessage);
+                await addPRComment(repoName, prNumber, preDeployMessage, installationId);
 
                 const postDeployMessage = await triggerDeployment(repoUrl, branchName, prNumber, imageName, containerName, forkRepoUrl);
-                await addPRComment(repoName, prNumber, postDeployMessage);
+                await addPRComment(repoName, prNumber, postDeployMessage, installationId);
                 
                 console.log("Deployment completed and comment added!")
             } catch (error) {
