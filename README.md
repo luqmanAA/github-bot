@@ -505,6 +505,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"test":"data"}' https://<n
 | Name                 | LinkedIn                                                                                     |
 |----------------------|----------------------------------------------------------------------------------------------|
 | Adesoji Awobajo    | <a href="https://www.linkedin.com/in/adesoji-awobajo" target="_blank">Adesoji Awobajo</a>                                                                                    |
+| Raji Risikat Yewande | <a href="https://www.linkedin.com/in/raji-risikat-yewande" target="_blank>Raji Risikat Yewande</a>
 | Toluwalemi Oluwadare | <a href="https://www.linkedin.com/in/toluwalemioluwadare/" target="_blank">Toluwalemi Oluwadare</a>
 | Oluwatosin Dorcas    | <a href="https://www.linkedin.com/in/oluwatosin-dorcas-b69767179?" target="_blank">Oluwatosin Dorcas</a>
 | Shirlyne Thiong'o    | <a href="https://www.linkedin.com/in/shirlyne-thiong-o-639aa8261/" target="_blank">Shirlyne Thiong'o</a>
