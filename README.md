@@ -384,13 +384,20 @@ ngrok http 3003
 - Clone the repository to your local machine.
 - Create a new branch,make changes,commit the changes and puush the changes
 - Create a Pull Request in the repository where the GitHub App is installed. The bot should automatically start the deployment process.
+[create a pull request](images/create-pr.png)
 
 - Verify Deployment:
 
   - Check the PR thread for a comment from the bot with the deployment status and URL.
   - Access the deployment using the provided URL to verify that the container is running.
 
+[pull request is being deployed](images/pr-being-deployed.png)
+
+[pull request deployment complete](images/deployment-complete.png)
+
 - Close the PR: Closing the PR should trigger the cleanup process, removing the Docker container and associated resources.
+
+[pull request closed](images/closed-pr.png)
 
 ## Collaboration Guide
 
