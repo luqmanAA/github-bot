@@ -54,7 +54,7 @@ app.post('/webhook', async (req, res) => {
         else if (action === 'closed') {
             try {
                 const message = await removeDeployedContainer(containerName, imageName);
-                await addPRComment(repoName, prNumber, message);
+                await addPRComment(repoName, prNumber, message, installationId);
                 console.log('Container removed and comment added')
             } catch (error) {
                 console.error('Error during deployment:', error);
