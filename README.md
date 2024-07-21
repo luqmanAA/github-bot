@@ -503,7 +503,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"test":"data"}' https://<n
 # Project Team Contributors
 
 | Name                 | LinkedIn                                                                                     |
-|----------------------|--------------------------------------------------------------------------------------------|
+|----------------------|-----------------------------------------------------------------------------------------|
 | Owoseni Emmanuel  |  <a href="http://linkedin.com/in/owoseni-emmanuel-2310aa162/" target="_blank">Owoseni Emmanuel</a>                                                                               
 | Toluwalemi Oluwadare | <a href="https://www.linkedin.com/in/toluwalemioluwadare/" target="_blank">Toluwalemi Oluwadare</a>
 | Oluwatosin Dorcas    | <a href="https://www.linkedin.com/in/oluwatosin-dorcas-b69767179?" target="_blank">Oluwatosin Dorcas</a>
