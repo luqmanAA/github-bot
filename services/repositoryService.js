@@ -7,11 +7,10 @@ import path from "path";
 const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 const APP_ID = process.env.APP_ID;
 const PRIVATE_KEY_PATH = process.env.PRIVATE_KEY_PATH;
-const INSTALLATION_ID = process.env.INSTALLATION_ID;
 
 let encoder = new TextEncoder();
 
-export async function addPRComment(repoName, prNumber, message) {
+export async function addPRComment(repoName, prNumber, message, installationId) {
 
     const privateKeyPath = path.resolve(PRIVATE_KEY_PATH);
     const privateKey = fs.readFileSync(privateKeyPath, "utf8");
@@ -21,7 +20,7 @@ export async function addPRComment(repoName, prNumber, message) {
         auth: {
           appId: APP_ID,
           privateKey: privateKey,
-          installationId: INSTALLATION_ID,
+          installationId,
         },
       });
     const url = `/repos/${repoName}/issues/${prNumber}/comments`;
