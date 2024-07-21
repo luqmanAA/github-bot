@@ -80,7 +80,7 @@ export async function triggerDeployment(repoUrl, branchName, prNumber, imageName
         await runCommand('docker run -d --name', [containerName, `-p ${hostPort}:${containerPort}`, imageName]);
 
         // build the URL of the deployed app and return as part of a message
-        const deploymentLink = await getNgrokUrl(hostPort);
+        const deploymentLink = `${process.env.DEPLOYMENT_BASE_URL}:${hostPort}`;
         return `Deployment completed! View it here: ${deploymentLink}`;
 
     } catch (error) {
