@@ -502,9 +502,10 @@ curl -X POST -H "Content-Type: application/json" -d '{"test":"data"}' https://<n
 
 # Project Team Contributors
 
-| Name     | LinkedIn |
-| -------- | -------- |
-| John Doe | link.com |
-| Jane Doe | link.com |
-
+| Name                 | LinkedIn                                                                                     |
+|----------------------|----------------------------------------------------------------------------------------------|
+| John Doe             | link.com                                                                                     |
+| Toluwalemi Oluwadare | <a href="https://www.linkedin.com/in/toluwalemioluwadare/" target="_blank">Toluwalemi Oluwadare</a>
+| Oluwatosin Dorcas    | <a href="https://www.linkedin.com/in/oluwatosin-dorcas-b69767179?" target="_blank">Oluwatosin Dorcas</a>
+| Shirlyne Thiong'o    | <a href="https://www.linkedin.com/in/shirlyne-thiong-o-639aa8261/" target=_blank">Shirlyne Thiong'o</a>
 ## Licence
