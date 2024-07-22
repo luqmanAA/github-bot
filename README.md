@@ -516,5 +516,8 @@ curl -X POST -H "Content-Type: application/json" -d '{"test":"data"}' https://<n
 | Kenneth Mahon  | <a href="https://www.linkedin.com/in/kenneth-mahon-b61648163/" target="_blank">Kenneth Mahon</a>
 | Adeshile Osunkoya  | <a href="https://www.linkedin.com/in/adeshile-osunkoya-101269105/" target="_blank">Adeshile Osunkoya</a> 
 | Abdul-Barri Lawal  | <a href="https://www.linkedin.com/in/abdul-barri-lawal/" target="_blank">Abdul-Barri Lawal</a> 
+| Owoseni Emmanuel | <a href="https://linkedin.com/in/owoseni-emmanuel-2310aa162/" target="_blank">Owoseni Emmanuel</a> 
 
 ## Licence
+
+http://linkedin.com/in/owoseni-emmanuel-2310aa162
