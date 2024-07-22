@@ -520,4 +520,3 @@ curl -X POST -H "Content-Type: application/json" -d '{"test":"data"}' https://<n
 
 ## Licence
 
-http://linkedin.com/in/owoseni-emmanuel-2310aa162
